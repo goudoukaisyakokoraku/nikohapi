@@ -1,0 +1,1063 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="新潟県阿賀野市の放課後等デイサービス ニコハピ。施設案内や会計情報をご覧いただけます。">
+
+<title>放課後等デイサービス ニコハピ</title>
+
+<style>
+
+/* ========================================
+   基本設定
+======================================== */
+
+:root {
+  --navy: #25364b;
+  --blue: #2789c8;
+  --green: #65b66d;
+  --pink: #ff899a;
+  --yellow: #ffca63;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--navy);
+  background: #ffffff;
+  font-family:
+    "Yu Gothic",
+    "Hiragino Kaku Gothic ProN",
+    Meiryo,
+    sans-serif;
+  line-height: 1.75;
+}
+
+a {
+  color: #167bc1;
+  text-decoration: none;
+}
+
+/* ========================================
+   メイン写真
+======================================== */
+
+.hero {
+  width: 100%;
+  background: #e8f6ff;
+}
+
+.hero-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ========================================
+   施設情報カード
+======================================== */
+
+.info {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 2%;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+
+  min-height: 190px;
+  padding: 25px 32px;
+
+  border-radius: 20px;
+}
+
+.address {
+  background: #fff0f2;
+}
+
+.phone {
+  background: #f0faee;
+}
+
+.facility {
+  background: #fff8e8;
+}
+
+.info-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  width: 76px;
+  height: 76px;
+
+  border-radius: 50%;
+  background: rgba(255,255,255,.9);
+
+  font-size: 37px;
+}
+
+.address .info-icon {
+  background: #ffe0e5;
+}
+
+.phone .info-icon {
+  background: #dff4d9;
+}
+
+.facility .info-icon {
+  background: #ffebbc;
+}
+
+.info-card h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.phone-number {
+  display: inline-block;
+
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 900;
+  line-height: 1.4;
+
+  white-space: nowrap;
+}
+
+.small-note {
+  margin-top: 7px !important;
+  color: #657484;
+  font-size: 15px !important;
+}
+
+.facility-name {
+  display: block;
+  margin-top: 2px;
+
+  font-size: 29px;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 6px 22px;
+
+  border: 1px solid #dce8f0;
+  border-radius: 9px;
+
+  background: white;
+
+  font-size: 15px;
+  font-weight: 800;
+}
+
+/* ========================================
+   共通セクション
+======================================== */
+
+.section-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(0, 1fr);
+
+  align-items: center;
+  gap: clamp(30px, 5vw, 100px);
+}
+
+.section-content {
+  min-width: 0;
+}
+
+.section-content h2 {
+  margin: 0 0 22px;
+
+  font-size: clamp(25px, 2.5vw, 35px);
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.section-content h2::after {
+  content: "";
+
+  display: block;
+
+  width: 90px;
+  height: 4px;
+
+  margin-top: 12px;
+
+  border-radius: 4px;
+
+  background: linear-gradient(
+    90deg,
+    var(--pink) 50%,
+    var(--yellow) 50%
+  );
+}
+
+.section-content p {
+  margin: 0 0 16px;
+
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.9;
+}
+
+/* ========================================
+   共通の水彩風装飾
+======================================== */
+
+.message-art {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  min-height: 245px;
+
+  padding: 35px 50px;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      ellipse at 22% 32%,
+      rgba(195, 237, 255, .65),
+      transparent 65%
+    ),
+
+    radial-gradient(
+      ellipse at 80% 28%,
+      rgba(255, 213, 237, .62),
+      transparent 65%
+    ),
+
+    radial-gradient(
+      ellipse at 48% 85%,
+      rgba(255, 237, 170, .65),
+      transparent 65%
+    );
+
+  border-radius:
+    48% 52% 55% 45% /
+    42% 48% 52% 58%;
+
+  transform: rotate(-3deg);
+}
+
+.message-art-inner {
+  position: relative;
+  z-index: 1;
+
+  transform: rotate(3deg);
+}
+
+.message-art-title {
+  margin: 0;
+
+  color: var(--navy);
+
+  font-size: clamp(20px, 1.65vw, 27px);
+  font-weight: 900;
+
+  letter-spacing: .12em;
+  line-height: 1.9;
+}
+
+.message-art-sub {
+  margin: 10px 0 0;
+
+  color: var(--navy);
+
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 700;
+
+  letter-spacing: .06em;
+  line-height: 1.8;
+}
+
+.message-art-sprout {
+  position: absolute;
+
+  right: 8%;
+  bottom: 14%;
+
+  width: 48px;
+  height: 58px;
+
+  transform: rotate(15deg);
+}
+
+.message-art-sprout::before {
+  content: "";
+
+  position: absolute;
+
+  left: 23px;
+  bottom: 5px;
+
+  width: 3px;
+  height: 34px;
+
+  border-radius: 3px;
+
+  background: #76b969;
+
+  transform: rotate(-12deg);
+}
+
+.message-art-sprout::after {
+  content: "";
+
+  position: absolute;
+
+  left: 6px;
+  top: 9px;
+
+  width: 23px;
+  height: 13px;
+
+  border-radius: 100% 0 100% 0;
+
+  background: #85c878;
+
+  transform: rotate(30deg);
+}
+
+.message-art-leaf {
+  position: absolute;
+
+  right: 2px;
+  top: 4px;
+
+  width: 22px;
+  height: 13px;
+
+  border-radius: 0 100% 0 100%;
+
+  background: #85c878;
+
+  transform: rotate(-20deg);
+}
+
+/* ========================================
+   ニコハピについて
+======================================== */
+
+.about {
+  position: relative;
+  overflow: hidden;
+
+  padding: 50px max(5%, 25px);
+
+  background: linear-gradient(
+    110deg,
+    #f3faff,
+    #ffffff 65%,
+    #f8fcff
+  );
+}
+
+/* ========================================
+   会計情報
+======================================== */
+
+.pdf-area {
+  position: relative;
+  overflow: hidden;
+
+  padding: 50px max(5%, 25px);
+
+  background: #eff9ff;
+}
+
+.pdf-area .section-layout {
+  margin-bottom: 30px;
+}
+
+.pdf-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 22px;
+}
+
+.pdf-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  min-height: 90px;
+  padding: 18px;
+
+  border: 1px solid #e3ebf2;
+  border-radius: 10px;
+
+  background: white;
+  color: var(--navy);
+
+  box-shadow:
+    0 3px 8px rgba(32,78,116,.06);
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+}
+
+.pdf-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 6px 18px rgba(32,78,116,.13);
+}
+
+.pdf-icon {
+  font-size: 35px;
+}
+
+.pdf-title {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.pdf-sub {
+  color: #687789;
+  font-size: 13px;
+}
+
+.pdf-arrow {
+  margin-left: auto;
+
+  color: var(--blue);
+  font-size: 27px;
+}
+
+/* ========================================
+   施設詳細
+======================================== */
+
+.details {
+  position: relative;
+  overflow: hidden;
+
+  padding: 50px max(5%, 25px);
+
+  background: #ffffff;
+}
+
+.details-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 10px;
+  padding: 14px 25px;
+
+  border: 1px solid #cbe8fa;
+  border-radius: 12px;
+
+  background: #e6f5ff;
+
+  font-size: 17px;
+  font-weight: 800;
+
+  transition:
+    transform .2s,
+    background .2s;
+}
+
+.details-link:hover {
+  transform: translateY(-2px);
+  background: #d6efff;
+}
+
+/* ========================================
+   フッター
+======================================== */
+
+footer {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 245px;
+
+  padding: 85px 5% 35px;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 100%,
+      #c7efa3,
+      transparent 65%
+    ),
+
+    radial-gradient(
+      ellipse at 80% 100%,
+      #b5e890,
+      transparent 65%
+    ),
+
+    #e9f8d8;
+}
+
+footer::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 48px;
+
+  background: #eff9ff;
+
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 35%,
+    80% 100%,
+    55% 45%,
+    30% 95%,
+    0 35%
+  );
+}
+
+.footer-inner {
+  position: relative;
+  z-index: 1;
+
+  max-width: 1300px;
+  margin: auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 30px;
+}
+
+.footer-logo {
+  color: var(--blue);
+
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.footer-logo span {
+  color: #ffb43d;
+}
+
+.footer-message {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.footer-flower {
+  position: absolute;
+
+  bottom: 8px;
+
+  font-size: 37px;
+  opacity: .8;
+}
+
+.flower-left {
+  left: 2%;
+}
+
+.flower-right {
+  right: 2%;
+}
+
+/* ========================================
+   タブレット対応
+======================================== */
+
+@media (max-width: 900px) {
+
+  .info {
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .info-card {
+    gap: 10px;
+    padding: 18px 12px;
+  }
+
+  .info-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+  }
+
+  .info-card h2 {
+    font-size: 18px;
+  }
+
+  .info-card p {
+    font-size: 15px;
+  }
+
+  .phone-number {
+    font-size: 19px;
+  }
+
+  .facility-name {
+    font-size: 23px;
+  }
+
+  .section-layout {
+    gap: 25px;
+  }
+
+  .message-art {
+    min-height: 220px;
+    padding: 25px;
+  }
+
+  .message-art-title {
+    font-size: 20px;
+  }
+
+  .pdf-list {
+    gap: 12px;
+  }
+
+  .pdf-card {
+    padding: 12px;
+  }
+}
+
+/* ========================================
+   スマホ対応
+======================================== */
+
+@media (max-width: 650px) {
+
+  .info {
+    grid-template-columns: 1fr;
+  }
+
+  .info-card {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .info-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+  }
+
+  .info-card h2 {
+    font-size: 20px;
+  }
+
+  .info-card p {
+    font-size: 17px;
+  }
+
+  .phone-number {
+    font-size: 25px;
+  }
+
+  .facility-name {
+    font-size: 27px;
+  }
+
+  .section-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .about,
+  .pdf-area,
+  .details {
+    padding: 35px 20px;
+  }
+
+  .section-content h2 {
+    font-size: 25px;
+  }
+
+  .section-content p {
+    font-size: 16px;
+  }
+
+  .message-art {
+    min-height: 210px;
+    padding: 30px 20px;
+  }
+
+  .message-art-title {
+    font-size: 20px;
+  }
+
+  .message-art-sub {
+    font-size: 13px;
+  }
+
+  .message-art-sprout {
+    right: 5%;
+    bottom: 8%;
+    transform: scale(.75);
+  }
+
+  .pdf-list {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-message {
+    font-size: 15px;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ========================================
+     メイン写真
+======================================== -->
+
+<header class="hero">
+
+  <img
+    class="hero-photo"
+    src="images/facility-new.png"
+    alt="放課後等デイサービス ニコハピの施設写真"
+  >
+
+</header>
+
+<main>
+
+<!-- ========================================
+     施設情報
+======================================== -->
+
+<section class="info">
+
+  <div class="info-card address">
+
+    <div class="info-icon">📍</div>
+
+    <div>
+
+      <h2>住所</h2>
+
+      <p>
+        〒959-2058<br>
+        新潟県阿賀野市関屋343-1
+      </p>
+
+      <a
+        class="map-link"
+        href="https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%98%BF%E8%B3%80%E9%87%8E%E5%B8%82%E9%96%A2%E5%B1%8B343-1"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🗺️ 地図で見る ↗
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="info-card phone">
+
+    <div class="info-icon">📞</div>
+
+    <div>
+
+      <h2>電話番号</h2>
+
+      <a
+        class="phone-number"
+        href="tel:08012830861"
+      >
+        080-1283-0861
+      </a>
+
+      <p class="small-note">
+        お気軽にお問い合わせください
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="info-card facility">
+
+    <div class="info-icon">🏠</div>
+
+    <div>
+
+      <h2>施設名</h2>
+
+      <p>
+        放課後等デイサービス
+
+        <span class="facility-name">
+          ニコハピ
+        </span>
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ========================================
+     ニコハピについて
+======================================== -->
+
+<section class="about">
+
+  <div class="section-layout">
+
+    <div class="section-content">
+
+      <h2>🌱 ニコハピについて</h2>
+
+      <p>
+        放課後等デイサービス ニコハピは、<br>
+        子どもたち一人ひとりの個性を大切にし、
+        安心して過ごせる環境の中で<br>
+        楽しく成長できる場を提供しています。<br>
+        地域に根ざした支援を通じて、
+        子どもたちとご家族の笑顔を応援します。
+      </p>
+
+    </div>
+
+    <div class="message-art">
+
+      <div class="message-art-inner">
+
+        <p class="message-art-title">
+          「できた！」<br>
+          「たのしい！」<br>
+          「また来たい！」
+        </p>
+
+        <p class="message-art-sub">
+          そんな気持ちを大切に。
+        </p>
+
+      </div>
+
+      <span class="message-art-sprout" aria-hidden="true">
+        <span class="message-art-leaf"></span>
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ========================================
+     会計情報
+======================================== -->
+
+<section class="pdf-area">
+
+  <div class="section-layout">
+
+    <div class="section-content">
+
+      <h2>📄 会計情報</h2>
+
+      <p>
+        放課後等デイサービス ニコハピの
+        会計情報を掲載しています。<br>
+        下記のPDFをクリックしてご覧いただけます。
+      </p>
+
+      <!-- 会計情報PDF：pdf/accounting/2026.pdf -->
+
+      <a
+        class="details-link"
+        href="pdf/accounting/2026.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        📄 2026年度 会計情報を見る（PDF） →
+      </a>
+
+    </div>
+
+    <div class="message-art">
+
+      <div class="message-art-inner">
+
+        <p class="message-art-title">
+          安心して過ごせる<br>
+          場所づくりを。
+        </p>
+
+        <p class="message-art-sub">
+          施設の情報を<br>
+          わかりやすくお届けします。
+        </p>
+
+      </div>
+
+      <span class="message-art-sprout" aria-hidden="true">
+        <span class="message-art-leaf"></span>
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ========================================
+     施設詳細
+======================================== -->
+
+<section class="details">
+
+  <div class="section-layout">
+
+    <div class="section-content">
+
+      <h2>📄 施設の詳細について</h2>
+
+      <p>
+        施設の詳しいご案内はこちらから
+        ご覧いただけます。
+      </p>
+
+      <!-- 施設詳細PDF：pdf/facility/details.pdf -->
+
+      <a
+        class="details-link"
+        href="pdf/facility/details.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        📄 施設の詳細を見る（PDF） →
+      </a>
+
+    </div>
+
+    <div class="message-art">
+
+      <div class="message-art-inner">
+
+        <p class="message-art-title">
+          ひとりひとりの<br>
+          笑顔と成長を大切に。
+        </p>
+
+        <p class="message-art-sub">
+          子どもたちの未来に、<br>
+          たくさんの笑顔を。
+        </p>
+
+      </div>
+
+      <span class="message-art-sprout" aria-hidden="true">
+        <span class="message-art-leaf"></span>
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- ========================================
+     フッター
+======================================== -->
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div class="footer-logo">
+      ☀ ニコ<span>ハピ</span>
+    </div>
+
+    <div>
+
+      〒959-2058<br>
+      新潟県阿賀野市関屋343-1<br>
+
+      電話：
+
+      <a href="tel:08012830861">
+        080-1283-0861
+      </a>
+
+    </div>
+
+    <div class="footer-message">
+      地域とともに、<br>
+      こどもたちの明るい未来を。
+    </div>
+
+  </div>
+
+  <span class="footer-flower flower-left">
+    🌼 🌱 🌸
+  </span>
+
+  <span class="footer-flower flower-right">
+    🌸 🌱 🌼
+  </span>
+
+</footer>
+
+</body>
+</html>
