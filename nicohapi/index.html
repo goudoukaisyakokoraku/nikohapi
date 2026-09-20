@@ -391,7 +391,7 @@ a {
 }
 
 /* ========================================
-   会計情報
+   会計情報・施設詳細
 ======================================== */
 
 .pdf-area {
@@ -403,8 +403,13 @@ a {
   background: #eff9ff;
 }
 
-.pdf-area .section-layout {
-  margin-bottom: 30px;
+.details {
+  position: relative;
+  overflow: hidden;
+
+  padding: 50px max(5%, 25px);
+
+  background: #ffffff;
 }
 
 .pdf-list {
@@ -414,6 +419,12 @@ a {
     repeat(3, minmax(0, 1fr));
 
   gap: 22px;
+
+  margin-top: 25px;
+}
+
+.pdf-list:empty {
+  display: none;
 }
 
 .pdf-card {
@@ -450,6 +461,8 @@ a {
 }
 
 .pdf-title {
+  overflow-wrap: anywhere;
+
   font-size: 16px;
   font-weight: 900;
 }
@@ -466,43 +479,11 @@ a {
   font-size: 27px;
 }
 
-/* ========================================
-   施設詳細
-======================================== */
+.pdf-status {
+  margin-top: 15px !important;
 
-.details {
-  position: relative;
-  overflow: hidden;
-
-  padding: 50px max(5%, 25px);
-
-  background: #ffffff;
-}
-
-.details-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-
-  margin-top: 10px;
-  padding: 14px 25px;
-
-  border: 1px solid #cbe8fa;
-  border-radius: 12px;
-
-  background: #e6f5ff;
-
-  font-size: 17px;
-  font-weight: 800;
-
-  transition:
-    transform .2s,
-    background .2s;
-}
-
-.details-link:hover {
-  transform: translateY(-2px);
-  background: #d6efff;
+  color: #66798b;
+  font-size: 15px !important;
 }
 
 /* ========================================
@@ -920,16 +901,9 @@ footer::before {
         下記のPDFをクリックしてご覧いただけます。
       </p>
 
-      <!-- 会計情報PDF：pdf/accounting/2026.pdf -->
-
-      <a
-        class="details-link"
-        href="pdf/accounting/2026.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        📄 2026年度 会計情報を見る（PDF） →
-      </a>
+      <p class="pdf-status" id="accounting-status">
+        PDFを読み込んでいます…
+      </p>
 
     </div>
 
@@ -957,6 +931,8 @@ footer::before {
 
   </div>
 
+  <div class="pdf-list" id="accounting-list"></div>
+
 </section>
 
 <!-- ========================================
@@ -976,16 +952,9 @@ footer::before {
         ご覧いただけます。
       </p>
 
-      <!-- 施設詳細PDF：pdf/facility/details.pdf -->
-
-      <a
-        class="details-link"
-        href="pdf/facility/details.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        📄 施設の詳細を見る（PDF） →
-      </a>
+      <p class="pdf-status" id="facility-status">
+        PDFを読み込んでいます…
+      </p>
 
     </div>
 
@@ -1012,6 +981,8 @@ footer::before {
     </div>
 
   </div>
+
+  <div class="pdf-list" id="facility-list"></div>
 
 </section>
 
@@ -1058,6 +1029,162 @@ footer::before {
   </span>
 
 </footer>
+
+<script>
+
+/* ========================================
+   GitHub上のPDFをフォルダ別に取得
+======================================== */
+
+const githubSettings = {
+  owner: "goudoukaisyakokoraku",
+  repo: "nikohapi",
+  branch: "main",
+  siteFolder: "nicohapi"
+};
+
+/*
+  GitHub上の配置：
+
+  nikohapi（リポジトリ）
+  └─ nicohapi
+     ├─ index.html
+     └─ pdf
+        ├─ facility
+        └─ accounting
+*/
+
+async function loadPdfFolder(folderName, listId, statusId) {
+
+  const list = document.getElementById(listId);
+  const status = document.getElementById(statusId);
+
+  const folderPath =
+    githubSettings.siteFolder + "/pdf/" + folderName;
+
+  const apiUrl =
+    "https://api.github.com/repos/" +
+    encodeURIComponent(githubSettings.owner) + "/" +
+    encodeURIComponent(githubSettings.repo) +
+    "/contents/" +
+    folderPath.split("/").map(encodeURIComponent).join("/") +
+    "?ref=" + encodeURIComponent(githubSettings.branch);
+
+  try {
+
+    const response = await fetch(apiUrl, {
+      headers: {
+        "Accept": "application/vnd.github+json"
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("GitHub API: " + response.status);
+    }
+
+    const files = await response.json();
+
+    if (!Array.isArray(files)) {
+      throw new Error("フォルダの情報を取得できませんでした");
+    }
+
+    const pdfFiles = files
+      .filter(file =>
+        file.type === "file" &&
+        /\.pdf$/i.test(file.name)
+      )
+      .sort((a, b) =>
+        a.name.localeCompare(b.name, "ja", {
+          numeric: true
+        })
+      );
+
+    list.replaceChildren();
+
+    if (pdfFiles.length === 0) {
+      status.textContent = "PDFは現在準備中です。";
+      return;
+    }
+
+    pdfFiles.forEach(file => {
+
+      const link = document.createElement("a");
+
+      link.className = "pdf-card";
+
+      /*
+        GitHub Pages上のPDFへのリンクを生成。
+        ファイル名に日本語や空白が含まれていても対応。
+      */
+
+      link.href =
+        "./pdf/" +
+        encodeURIComponent(folderName) + "/" +
+        encodeURIComponent(file.name);
+
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+
+      const icon = document.createElement("span");
+      icon.className = "pdf-icon";
+      icon.textContent = "📄";
+
+      const info = document.createElement("div");
+
+      const title = document.createElement("div");
+      title.className = "pdf-title";
+      title.textContent =
+        file.name.replace(/\.pdf$/i, "");
+
+      const sub = document.createElement("div");
+      sub.className = "pdf-sub";
+      sub.textContent = "PDFを見る";
+
+      info.append(title, sub);
+
+      const arrow = document.createElement("span");
+      arrow.className = "pdf-arrow";
+      arrow.textContent = "↗";
+
+      link.append(icon, info, arrow);
+
+      list.appendChild(link);
+
+    });
+
+    status.hidden = true;
+
+  } catch (error) {
+
+    console.error(
+      folderName + " のPDF取得に失敗しました:",
+      error
+    );
+
+    status.textContent =
+      "PDF一覧を読み込めませんでした。少し時間をおいて再読み込みしてください。";
+
+  }
+
+}
+
+/* ========================================
+   会計情報と施設詳細を別々に表示
+======================================== */
+
+loadPdfFolder(
+  "accounting",
+  "accounting-list",
+  "accounting-status"
+);
+
+loadPdfFolder(
+  "facility",
+  "facility-list",
+  "facility-status"
+);
+
+</script>
 
 </body>
 </html>
