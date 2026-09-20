@@ -1040,18 +1040,17 @@ const githubSettings = {
   owner: "goudoukaisyakokoraku",
   repo: "nikohapi",
   branch: "main",
-  siteFolder: "nicohapi"
+  siteFolder: ""
 };
 
 /*
   GitHub上の配置：
 
   nikohapi（リポジトリ）
-  └─ nicohapi
-     ├─ index.html
-     └─ pdf
-        ├─ facility
-        └─ accounting
+  ├─ index.html
+  └─ pdf
+     ├─ facility
+     └─ accounting
 */
 
 async function loadPdfFolder(folderName, listId, statusId) {
@@ -1060,7 +1059,7 @@ async function loadPdfFolder(folderName, listId, statusId) {
   const status = document.getElementById(statusId);
 
   const folderPath =
-    githubSettings.siteFolder + "/pdf/" + folderName;
+    "pdf/" + folderName;
 
   const apiUrl =
     "https://api.github.com/repos/" +
